@@ -1,21 +1,32 @@
 import {
   DarkTheme,
   DefaultTheme,
+  ParamListBase,
   ThemeProvider,
-} from "@react-navigation/native";
-import React from "react";
-import { useColorScheme } from "react-native";
+} from "expo-router/react-navigation";
+import { Keyboard, useColorScheme } from "react-native";
 
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import CustomDrawerContent from "@/components/CustomDrawerContent";
-import { Drawer } from "expo-router/drawer";
+import { Drawer, DrawerNavigationProp } from "expo-router/drawer";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const onHeaderPress = (
+    navigation: DrawerNavigationProp<ParamListBase, string, undefined>,
+  ) => {
+    Keyboard.dismiss();
+    navigation.toggleDrawer();
+  };
+
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <AnimatedSplashOverlay />
-      <Drawer drawerContent={CustomDrawerContent}>
+      <Drawer
+        drawerContent={CustomDrawerContent}
+        screenOptions={({ navigation }) => ({})} // <- DrawerNavigationProp
+      >
         <Drawer.Screen name="index" options={{ title: "Home" }} />
         <Drawer.Screen name="explore" options={{ title: "Explore" }} />
         <Drawer.Screen

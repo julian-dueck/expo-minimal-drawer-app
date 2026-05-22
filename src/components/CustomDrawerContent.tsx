@@ -3,7 +3,7 @@ import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
-} from "@react-navigation/drawer";
+} from "expo-router/drawer";
 import { useCallback } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
